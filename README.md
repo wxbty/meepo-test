@@ -53,7 +53,7 @@ PRIMARY KEY (product_id)
 
 create table txc_undo_log
 (
-  id            bigint auto_increment
+  id            bigint auto_increment 
   comment '主键'
     primary key,
   gmt_create    datetime     not null
