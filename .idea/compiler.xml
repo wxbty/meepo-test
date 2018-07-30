@@ -6,10 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="meepo-test" />
         <module name="sample-txc-dubbo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="meepo-test" target="1.7" />
       <module name="sample-txc-dubbo" target="1.7" />
     </bytecodeTargetLevel>
   </component>

@@ -209,15 +209,15 @@
           <assembleDirectory>client</assembleDirectory>
           <programs>
             <program>
-              <mainClass>com.taobao.txc.dubbo.OrderServiceImpl</mainClass>
+              <mainClass>com.tuya.txc.dubbo.OrderServiceImpl</mainClass>
               <name>order</name>
             </program>
             <program>
-              <mainClass>com.taobao.txc.dubbo.StockServiceImpl</mainClass>
+              <mainClass>com.tuya.txc.dubbo.StockServiceImpl</mainClass>
               <name>stock</name>
             </program>
             <program>
-              <mainClass>com.taobao.txc.dubbo.Client</mainClass>
+              <mainClass>com.tuya.txc.dubbo.Client</mainClass>
               <name>client</name>
             </program>
           </programs>

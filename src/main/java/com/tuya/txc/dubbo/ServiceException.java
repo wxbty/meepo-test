@@ -1,4 +1,4 @@
-package com.taobao.txc.dubbo;
+package com.tuya.txc.dubbo;
 
 public class ServiceException extends Exception {
 	private static final long serialVersionUID = 1L;

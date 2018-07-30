@@ -1,11 +1,10 @@
-package com.taobao.txc.dubbo;
+package com.tuya.txc.dubbo;
 
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
 
 public class CalcService implements Calc {
 

@@ -19,27 +19,14 @@
     <dubbo:consumer check="false" timeout="1500000" />
     <dubbo:protocol name="dubbo" port="30881" />
     <!-- 生成远程服务代理，可以和本地bean一样使用OrderService -->
-    <dubbo:reference id="OrderService" interface="com.taobao.txc.dubbo.OrderService"  group="org.bytesoft.bytejta"
+    <dubbo:reference id="OrderService" interface="com.tuya.txc.dubbo.OrderService" group="org.bytesoft.bytejta"
                      filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" />
     <!-- 生成远程服务代理，可以和本地bean一样使用StockService -->
-    <dubbo:reference id="StockService" interface="com.taobao.txc.dubbo.StockService" group="org.bytesoft.bytejta"
+    <dubbo:reference id="StockService" interface="com.tuya.txc.dubbo.StockService" group="org.bytesoft.bytejta"
                      filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" />
 
-    <!---阿里云环境下：GTS Scanner配置方式-->
-    <!--<bean class="com.taobao.txc.client.aop.TxcTransactionScaner">-->
-        <!--<constructor-arg value="txc_test_public.1129361738553704.QD"/>-->
-        <!--<property name="accessKey" value="LTAI98Z8edI3mq5H"/>-->
-        <!--<property name="secretKey" value="XJpkN265S7bFN0ddlqpsw5FybAg05T"/>-->
-    <!--</bean>-->
-    <!---公网测试环境下：GTS Scanner配置方式-->
-    <!--<bean class="com.taobao.txc.client.aop.TxcTransactionScaner">-->
-    <!--<constructor-arg value="myapp"/>-->
-    <!--<constructor-arg value="txc_test_public.1129361738553704.QD"/>-->
-    <!--<constructor-arg value="1" />-->
-    <!--<constructor-arg value="https://test-cs-gts.aliyuncs.com" />-->
-    <!--</bean>-->
 
     <!--将客户端类配置为bean对象，分布式事务才会启动哦-->
-    <bean id="client" class="com.taobao.txc.dubbo.Client" />
-    <bean id="calcService" class="com.taobao.txc.dubbo.CalcService" />
+    <bean id="client" class="com.tuya.txc.dubbo.Client" />
+    <bean id="calcService" class="com.tuya.txc.dubbo.CalcService" />
 </beans>

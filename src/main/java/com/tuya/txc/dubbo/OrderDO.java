@@ -1,4 +1,4 @@
-package com.taobao.txc.dubbo;
+package com.tuya.txc.dubbo;
 
 import java.io.Serializable;
 import java.sql.Timestamp;

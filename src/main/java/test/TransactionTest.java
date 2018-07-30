@@ -1,22 +1,18 @@
 package test;
 
-import com.taobao.txc.dubbo.Calc;
+import com.tuya.txc.dubbo.Calc;
 import com.taobao.txc.dubbo.Calculator;
-import com.taobao.txc.dubbo.OrderService;
-import com.taobao.txc.dubbo.StockService;
+import com.tuya.txc.dubbo.OrderService;
+import com.tuya.txc.dubbo.StockService;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class CalculatorTest {
-
-    private static Calculator calculator = new Calculator();
-
+public class TransactionTest {
 
 
     @Test
@@ -24,7 +20,6 @@ public class CalculatorTest {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"dubbo-client.xml"});
         final OrderService orderService = (OrderService)context.getBean("OrderService");
         final Calc calcService = (Calc)context.getBean("calcService");
-
 
         final String userId = "feigh";
         int preAmount = orderService.getSum(userId).intValue();;

@@ -59,7 +59,7 @@
     <!-- 提供方应用信息-->
     <dubbo:application name="order-service"/>
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.taobao.txc.dubbo.OrderService" ref="OrderService" group="org.bytesoft.bytejta"
+    <dubbo:service interface="com.tuya.txc.dubbo.OrderService" ref="OrderService" group="org.bytesoft.bytejta"
                    filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" timeout ="6000"/>
 
     <!---阿里云环境下：GTS Scanner配置方式-->
@@ -76,6 +76,6 @@
     <!--<constructor-arg value="https://test-cs-gts.aliyuncs.com" />-->
     <!--</bean>-->
 
-    <bean id="OrderService" class="com.taobao.txc.dubbo.OrderServiceImpl" />
+    <bean id="OrderService" class="com.tuya.txc.dubbo.OrderServiceImpl" />
 </beans>
             

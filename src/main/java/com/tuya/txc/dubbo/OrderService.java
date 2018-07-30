@@ -1,4 +1,4 @@
-package com.taobao.txc.dubbo;
+package com.tuya.txc.dubbo;
 
 /**
  *  订单服务类，实现订单相关操作

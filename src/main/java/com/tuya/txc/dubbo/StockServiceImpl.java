@@ -1,4 +1,4 @@
-package com.taobao.txc.dubbo;
+package com.tuya.txc.dubbo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;

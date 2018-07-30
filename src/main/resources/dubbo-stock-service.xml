@@ -56,8 +56,8 @@
     <dubbo:protocol name="dubbo" port="20881" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.taobao.txc.dubbo.StockService" ref="StockService" group="org.bytesoft.bytejta"
-                   filter="transaction" loadbalance="transaction" cluster="failfast" retries="0"  timeout ="6000"/>
+    <dubbo:service interface="com.tuya.txc.dubbo.StockService" ref="StockService" group="org.bytesoft.bytejta"
+                   filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" timeout ="6000"/>
 
 
     <!---阿里云环境下：GTS Scanner配置方式-->
@@ -74,6 +74,6 @@
     <!--<constructor-arg value="https://test-cs-gts.aliyuncs.com" />-->
     <!--</bean>-->
 
-    <bean id="StockService" class="com.taobao.txc.dubbo.StockServiceImpl" />
+    <bean id="StockService" class="com.tuya.txc.dubbo.StockServiceImpl" />
 </beans>
             
