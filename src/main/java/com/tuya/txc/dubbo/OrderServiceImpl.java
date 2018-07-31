@@ -14,13 +14,20 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(rollbackFor = ServiceException.class)
     public int createOrder(OrderDO orderDO) {
         try {
-            Thread.sleep(new Random().nextInt(7000));
+            //设置概率超时
+            Thread.sleep(new Random().nextInt(1700));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         System.out.println("createOrder is called.");
         String sql = "insert into orders(user_id,product_id,number,gmt_create) values(?, ?, ?, ?)";
         int ret = jdbcTemplate.update(sql, new Object[]{orderDO.getUserId(), orderDO.getProductId(), orderDO.getNumber(), orderDO.getGmtCreate()});
+        try {
+            //设置概率超时
+            Thread.sleep(new Random().nextInt(1800));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("createOrder success.");
         return ret;
     }

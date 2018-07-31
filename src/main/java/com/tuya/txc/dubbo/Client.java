@@ -2,7 +2,6 @@ package com.tuya.txc.dubbo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.UUID;
 import java.util.concurrent.CountDownLatch;
 
 public class Client {
@@ -14,7 +13,7 @@ public class Client {
         final Calc calcService = (Calc)context.getBean("calcService");
 
         int previousAmount = stockService.getSum().intValue();
-        final String userId = UUID.randomUUID().toString();
+        final String userId = "406";
         int threadNum = 2;
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0;tnum < threadNum;tnum++) {
