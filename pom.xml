@@ -13,19 +13,11 @@
   </properties>
 
   <dependencies>
-    <!--<dependency>-->
-      <!--<groupId>com.taobao.txc</groupId>-->
-      <!--<artifactId>txc-client</artifactId>-->
-      <!--<version>${txc.version}</version>-->
-      <!--<scope>system</scope>-->
-      <!--<systemPath>${basedir}/../lib/${txc-sdk-package-name}</systemPath>-->
-    <!--</dependency>-->
+
     <dependency>
       <groupId>com.tuya.jta</groupId>
       <artifactId>bytejta-supports-dubbo</artifactId>
       <version>2.0</version>
-      <!--<scope>system</scope>-->
-      <!--<systemPath>${basedir}/../lib/meepo.jar</systemPath>-->
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
@@ -75,11 +67,7 @@
       </exclusions>
     </dependency>
 
-    <dependency>
-      <groupId>com.taobao.diamond</groupId>
-      <artifactId>diamond-client</artifactId>
-      <version>edas-3.7.3</version>
-    </dependency>
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
@@ -144,12 +132,6 @@
       <version>4.12</version>
       <scope>compile</scope>
     </dependency>
-      <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.12</version>
-          <scope>compile</scope>
-      </dependency>
   </dependencies>
 
   <build>
