@@ -8,7 +8,7 @@
     <context:component-scan base-package="com.tuya.txc.dubbo" />
     <import resource="classpath:bytejta-supports-dubbo.xml" />
     <bean id="dataSourceWrap" class="org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl">
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db2" />
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db2?useSSL=false" />
         <property name="user" value="root" />
         <property name="password" value="123456" />
         <property name="className" value="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource" />
@@ -50,7 +50,7 @@
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.tuya.txc.dubbo.StockService" ref="StockService" group="org.bytesoft.bytejta"
-                   filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" timeout ="6000"/>
+                   filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" timeout ="3000"/>
 
     <bean id="StockService" class="com.tuya.txc.dubbo.StockServiceImpl" />
 </beans>
