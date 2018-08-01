@@ -2,8 +2,11 @@ package com.tuya.txc.dubbo;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class OrderServiceImpl implements OrderService {
@@ -51,10 +54,16 @@ public class OrderServiceImpl implements OrderService {
         return sum;
     }
 
-    public OrderDO queryRadom()
-    {
-        System.out.println("queryRadom is called.");
-        OrderDO order = jdbcTemplate.queryForObject("select * from orders where id = (select max(id) from orders)",OrderDO.class);
+    public OrderDO queryMax() {
+        System.out.println("queryMax is called.");
+        OrderDO order = jdbcTemplate.queryForObject("select * from orders where id = (select max(id) from orders)", new RowMapper<OrderDO>() {
+            @Override
+            public OrderDO mapRow(ResultSet arg0, int arg1) throws SQLException {
+                OrderDO orderDO = new OrderDO(arg0.getString("user_id"), arg0.getInt("product_id"), arg0.getInt("number"), arg0.getTimestamp("gmt_create"));
+                return orderDO;
+            }
+        });
+
         return order;
     }
 

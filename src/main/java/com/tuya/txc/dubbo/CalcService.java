@@ -42,7 +42,7 @@ public class CalcService implements Calc {
         if (new Random().nextInt(100) < 3) {
             throw new ServiceException("error");
         }
-        System.out.println("product id：" + productId + " number：" + productNumber);
+//        System.out.println("product id：" + productId + " number：" + productNumber);
     }
 
 
@@ -51,7 +51,7 @@ public class CalcService implements Calc {
     public void bussinessDel(OrderService orderService, StockService stockService, String userId) throws ServiceException {
         int productId = new Random().nextInt(1000);
         int productNumber = new Random().nextInt(5) + 1;
-        OrderDO orderDO = orderService.queryRadom();
+        OrderDO orderDO = orderService.queryMax();
         orderService.delOrder(orderDO);
         if (new Random().nextInt(100) < 1) {
             throw new ServiceException("error");
@@ -61,6 +61,6 @@ public class CalcService implements Calc {
         if (new Random().nextInt(100) < 3) {
             throw new ServiceException("error");
         }
-        System.out.println("product id：" + productId + " number：" + productNumber);
+//        System.out.println("product id：" + productId + " number：" + productNumber);
     }
 }

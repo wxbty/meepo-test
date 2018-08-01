@@ -6,8 +6,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.tuya.txc.dubbo" />
-    <import resource="classpath:bytejta-supports-dubbo.xml" />
-    <bean id="dataSourceWrap" class="org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl">
+    <import resource="classpath:jta-supports-dubbo.xml" />
+    <bean id="dataSourceWrap" class="org.feisoft.jta.supports.jdbc.XADataSourceImpl">
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/db2?useSSL=false" />
         <property name="user" value="root" />
         <property name="password" value="123456" />
@@ -49,7 +49,7 @@
     <dubbo:protocol name="dubbo" port="20881" />
 
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.tuya.txc.dubbo.StockService" ref="StockService" group="org.bytesoft.bytejta"
+    <dubbo:service interface="com.tuya.txc.dubbo.StockService" ref="StockService" group="org.feisoft.jta"
                    filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" timeout ="3000"/>
 
     <bean id="StockService" class="com.tuya.txc.dubbo.StockServiceImpl" />

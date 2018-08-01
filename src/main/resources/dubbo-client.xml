@@ -7,7 +7,7 @@
                         http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <import resource="classpath:bytejta-supports-dubbo.xml" />
+    <import resource="classpath:jta-supports-dubbo.xml" />
     <context:component-scan base-package="com.tuya.txc.dubbo" />
     <!--dubbo配置-->
     <!-- 消费方应用名 -->
@@ -19,10 +19,10 @@
     <dubbo:consumer check="false" timeout="1500000" />
     <dubbo:protocol name="dubbo" port="30881" />
     <!-- 生成远程服务代理，可以和本地bean一样使用OrderService -->
-    <dubbo:reference id="OrderService" interface="com.tuya.txc.dubbo.OrderService" group="org.bytesoft.bytejta"
+    <dubbo:reference id="OrderService" interface="com.tuya.txc.dubbo.OrderService" group="org.feisoft.jta"
                      filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" />
     <!-- 生成远程服务代理，可以和本地bean一样使用StockService -->
-    <dubbo:reference id="StockService" interface="com.tuya.txc.dubbo.StockService" group="org.bytesoft.bytejta"
+    <dubbo:reference id="StockService" interface="com.tuya.txc.dubbo.StockService" group="org.feisoft.jta"
                      filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" />
 
 

@@ -21,5 +21,5 @@ public interface OrderService {
      */
     Integer getSum(String userId);
 
-    OrderDO queryRadom();
+    OrderDO queryMax();
 }

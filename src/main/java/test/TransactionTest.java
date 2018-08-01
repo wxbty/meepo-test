@@ -69,6 +69,7 @@ public class TransactionTest {
     }
 
 
+    //插入订单，减少库存
     @Test
     public void testInsertAndUpdate() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"dubbo-client.xml"});
@@ -91,7 +92,7 @@ public class TransactionTest {
                             calcService.bussiness(orderService, stockService, userId);
                         } catch (Exception e) {
                             System.out.println("Transaction is rollbacked.");
-                            e.printStackTrace();
+//                            e.printStackTrace();
                         }
                     }
                     countDownLatch.countDown();

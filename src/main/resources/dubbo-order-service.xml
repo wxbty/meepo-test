@@ -8,9 +8,9 @@
 
 
     <context:component-scan base-package="com.tuya.txc.dubbo" />
-    <import resource="classpath:bytejta-supports-dubbo.xml" />
+    <import resource="classpath:jta-supports-dubbo.xml" />
 
-    <bean id="dataSourceWrap" class="org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl">
+    <bean id="dataSourceWrap" class="org.feisoft.jta.supports.jdbc.XADataSourceImpl">
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1?useSSL=false" />
         <property name="user" value="root" />
         <property name="password" value="123456" />
@@ -52,7 +52,7 @@
     <!-- 提供方应用信息-->
     <dubbo:application name="order-service"/>
     <!-- 声明需要暴露的服务接口 -->
-    <dubbo:service interface="com.tuya.txc.dubbo.OrderService" ref="OrderService" group="org.bytesoft.bytejta"
+    <dubbo:service interface="com.tuya.txc.dubbo.OrderService" ref="OrderService" group="org.feisoft.jta"
                    filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" timeout ="3000"/>
 
     <bean id="OrderService" class="com.tuya.txc.dubbo.OrderServiceImpl" />
