@@ -16,8 +16,14 @@
 
     <dependency>
       <groupId>com.tuya.jta</groupId>
-      <artifactId>bytejta-supports-dubbo</artifactId>
+      <artifactId>jta-supports-dubbo</artifactId>
       <version>2.0</version>
+      <!--<exclusions>-->
+        <!--<exclusion>-->
+          <!--<artifactId>bytejta-supports</artifactId>-->
+          <!--<groupId>com.tuya.jta</groupId>-->
+        <!--</exclusion>-->
+      <!--</exclusions>-->
     </dependency>
     <dependency>
       <groupId>com.alibaba</groupId>
