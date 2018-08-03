@@ -8,8 +8,6 @@
 
   <properties>
     <spring.version>4.2.4.RELEASE</spring.version>
-    <txc-sdk-package-name>txc-client-2.0.72.jar</txc-sdk-package-name>
-    <txc.version>2.0.72</txc.version>
   </properties>
 
   <dependencies>
@@ -150,27 +148,7 @@
           <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>copy-resources</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${basedir}/client/bin</outputDirectory>
-              <resources>
-                <resource>
-                  <directory>${basedir}/src/bin</directory>
-                  <filtering>true</filtering>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
+
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>appassembler-maven-plugin</artifactId>
@@ -194,7 +172,7 @@
           <binFileExtensions>
             <unix>.sh</unix>
           </binFileExtensions>
-          <assembleDirectory>client</assembleDirectory>
+          <assembleDirectory>doc</assembleDirectory>
           <programs>
             <program>
               <mainClass>com.tuya.txc.dubbo.OrderServiceImpl</mainClass>
