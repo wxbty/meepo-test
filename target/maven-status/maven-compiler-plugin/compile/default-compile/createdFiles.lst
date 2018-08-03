@@ -1,0 +1,15 @@
+com/tuya/txc/dubbo/OrderDO.class
+com/tuya/txc/dubbo/ServiceException.class
+test/TransactionTest$2.class
+com/tuya/txc/dubbo/OrderServiceImpl$1.class
+com/tuya/txc/dubbo/StockService.class
+com/tuya/txc/dubbo/StockServiceImpl.class
+com/tuya/txc/dubbo/OrderServiceImpl.class
+com/tuya/txc/dubbo/Calc.class
+com/tuya/txc/dubbo/Client.class
+test/TransactionTest$1.class
+test/TransactionTest.class
+com/tuya/txc/dubbo/CalcService.class
+com/tuya/txc/dubbo/OrderService.class
+com/tuya/txc/dubbo/Client$1.class
+test/TransactionTest$3.class
