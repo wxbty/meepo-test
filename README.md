@@ -16,7 +16,7 @@
 
 打开sample-txc-dubbo/src/main/resources目录，将dubbo-order-service.xml、dubbo-stock-service.xml两个文件中数据源的url、username、password修改为实际值。
 
-4) 运行样例
+4) 运行test中的测试用例
 
 
 ---------------建表sql语句-----------------
