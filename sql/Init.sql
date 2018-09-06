@@ -51,6 +51,7 @@ CREATE TABLE txc_lock (
   branch_id  varchar(64) NOT NULL,
   xlock      varchar(64) NOT NULL,
   slock      int         NOT NULL,
+  create_time bigint     NOT NULL,
   CONSTRAINT txc_log_id_uindex UNIQUE txc_log_id_uindex (id),
   CONSTRAINT txc_lock_table_name_key_value_xlock_uindex UNIQUE txc_lock_table_name_key_value_xlock_uindex (table_name, key_value, xlock)
 )
