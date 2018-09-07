@@ -8,7 +8,7 @@
 
 安装MySQL，创建两个数据库db1和db2。在db1和db2中分别创建txc_undo_log表。在db1库中创建orders表，在db2库中创建stock表。
 
-2) 下载样例
+2) 下载meepo
 
 将工程meepo下载到本地机器，样例中包含了meepo的依赖，需要meepo打包到本地仓库。
 
