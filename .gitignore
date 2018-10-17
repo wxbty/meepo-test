@@ -33,6 +33,6 @@ out/
 .DS_Store
 Thumbs.db
 
-compiler.xml
+.idea/compiler.xml
 modules.xml
 workspace.xml
