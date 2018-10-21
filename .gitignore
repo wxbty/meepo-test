@@ -1,38 +1,10 @@
-# gradle ignore
-.gradle
-build/
-
-# maven ignore
-target/
-*.war
-*.zip
-*.tar
-*.tar.gz
-
-# eclipse ignore
-.settings/
-.project
-.classpath
-
-# idea ignore
-.idea/
-*.ipr
 *.iml
-*.iws
-out/
-
-# temp ignore
+.idea
 *.log
-*.cache
-*.diff
-*.patch
-*.tmp
-*.class
-
-# system ignore
+**/*.iml
+**/.idea
+**/*.log
 .DS_Store
-Thumbs.db
-
-.idea/compiler.xml
-modules.xml
-workspace.xml
+**/.DS_Store
+target
+out

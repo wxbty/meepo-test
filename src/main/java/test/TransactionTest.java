@@ -7,13 +7,14 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TransactionTest {
 
-    private   int total = 200;
+    private AtomicInteger total = new AtomicInteger(200);
 
 
     //测试单sql本地事务
@@ -25,22 +26,23 @@ public class TransactionTest {
 
         final String userId = "406";
         final int increaseNum = 10;
-        final int times = 30;
-        int threadNum = 2;
+        final int times = 3;
+        int threadNum = 20;
 
-        int preAmount = orderService.getSum(userId).intValue()+total;
+        int preAmount = orderService.getSum(userId).intValue() + total.get();
 
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
-        for (int tnum = 0;tnum < threadNum;tnum++) {
+        for (int tnum = 0; tnum < threadNum; tnum++) {
             Thread thread = new Thread() {
+
                 @Override
                 public void run() {
-                    for (int i = 0;i < times;i++) {
+                    for (int i = 0; i < times; i++) {
                         try {
-                            total -= increaseNum;
-                            calcService.insertOrder(orderService,userId,increaseNum);
+                            total.getAndAdd(-increaseNum);
+                            calcService.insertOrder(orderService, userId, increaseNum);
                         } catch (Exception e) {
-                            total += increaseNum;
+                            total.getAndAdd(increaseNum);
                             System.out.println("Transaction is rollbacked.");
                             e.printStackTrace();
                         }
@@ -56,16 +58,15 @@ public class TransactionTest {
             e.printStackTrace();
         }
 
-
-        int currentAmount = orderService.getSum(userId).intValue()+total;
-        if (currentAmount ==preAmount) {
+        int currentAmount = orderService.getSum(userId).intValue() + total.get();
+        if (currentAmount == preAmount) {
             System.out.println("The result is right.");
         } else {
-            System.out.println("preAmount="+preAmount);
-            System.out.println("currentAmount="+currentAmount);
+            System.out.println("preAmount=" + preAmount);
+            System.out.println("currentAmount=" + currentAmount);
             System.out.println("The result is wrong.");
         }
-        assertTrue(currentAmount==preAmount);
+        assertTrue(currentAmount == preAmount);
     }
 
 
@@ -81,13 +82,13 @@ public class TransactionTest {
         final String userId = "406";
         int previousproductNumber = orderService.getSum(userId).intValue();
         previousAmount = previousAmount+previousproductNumber;
-        int threadNum = 2;
+        int threadNum = 20;
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0;tnum < threadNum;tnum++) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    for (int i = 0;i < 50;i++) {
+                    for (int i = 0;i < 3;i++) {
                         try {
                             calcService.bussiness(orderService, stockService, userId);
                         } catch (Exception e) {
@@ -129,13 +130,13 @@ public class TransactionTest {
         final String userId = "406";
         int previousproductNumber = orderService.getSum(userId).intValue();
         previousAmount = previousAmount+previousproductNumber;
-        int threadNum = 2;
+        int threadNum = 20;
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0;tnum < threadNum;tnum++) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    for (int i = 0;i < 10;i++) {
+                    for (int i = 0;i < 5;i++) {
                         try {
                             calcService.bussinessDel(orderService, stockService, userId);
                         } catch (Exception e) {
