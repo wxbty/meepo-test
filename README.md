@@ -8,7 +8,7 @@
 
 安装MySQL，创建两个数据库db1和db2。在db1和db2中分别创建txc_undo_log表。在db1库中创建orders表，在db2库中创建stock表。
 
-2) 下载样例
+2) 下载meepo
 
 将工程meepo下载到本地机器，样例中包含了meepo的依赖，需要meepo打包到本地仓库。
 
@@ -51,14 +51,16 @@ CREATE TABLE txc_undo_log (
 CREATE INDEX unionkey ON txc_undo_log (xid, branch_id);
 
 CREATE TABLE txc_lock (
-	id bigint PRIMARY KEY AUTO_INCREMENT,
-	table_name varchar(32) NOT NULL,
-	key_value bigint NOT NULL,
-	xid varchar(64) NOT NULL,
-	branch_id varchar(64) NOT NULL,
-	xlock varchar(64) NOT NULL,
-	slock int NOT NULL,
-	CONSTRAINT txc_log_id_uindex UNIQUE txc_log_id_uindex (id),
-	CONSTRAINT txc_lock_table_name_key_value_xlock_uindex UNIQUE txc_lock_table_name_key_value_xlock_uindex (table_name, key_value, xlock)
-) CHARSET = utf8mb4;
+  id         bigint PRIMARY KEY AUTO_INCREMENT,
+  table_name varchar(32) NOT NULL,
+  key_value  bigint      NOT NULL,
+  xid        varchar(64) NOT NULL,
+  branch_id  varchar(64) NOT NULL,
+  xlock      varchar(64) NOT NULL,
+  slock      int         NOT NULL,
+  create_time bigint     NOT NULL,
+  CONSTRAINT txc_log_id_uindex UNIQUE txc_log_id_uindex (id),
+  CONSTRAINT txc_lock_table_name_key_value_xlock_uindex UNIQUE txc_lock_table_name_key_value_xlock_uindex (table_name, key_value, xlock)
+)
+  CHARSET = utf8mb4;
 
