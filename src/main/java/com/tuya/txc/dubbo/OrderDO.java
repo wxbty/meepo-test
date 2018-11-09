@@ -10,7 +10,18 @@ public class OrderDO implements Serializable {
     int number;
     Timestamp gmtCreate;
 
-    public OrderDO(String userId, int productId, int number, Timestamp gmtCreate) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    int id;
+
+    public OrderDO(int id,String userId, int productId, int number, Timestamp gmtCreate) {
+        this.id = id;
         this.userId = userId;
         this.productId = productId;
         this.number = number;

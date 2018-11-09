@@ -45,4 +45,24 @@ public class Client {
             System.out.println("The result is wrong.");
         }
     }
+
+       public void printTrack(){
+            StackTraceElement[] st = Thread.currentThread().getStackTrace();
+            if(st==null){
+//                logger.info("无堆栈...");
+                return;
+            }
+            StringBuffer sbf =new StringBuffer();
+            for(StackTraceElement e:st){
+                if(sbf.length()>0){
+                    sbf.append(" <- ");
+                    sbf.append(System.getProperty("line.separator"));
+                }
+                sbf.append(java.text.MessageFormat.format("{0}.{1}() {2}"
+                        ,e.getClassName()
+                        ,e.getMethodName()
+                        ,e.getLineNumber()));
+            }
+//            logger.info(sbf.toString());
+        }
 }

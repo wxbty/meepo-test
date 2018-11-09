@@ -28,12 +28,12 @@
       <artifactId>druid</artifactId>
       <version>1.0.17</version>
     </dependency>
-    <!--<dependency>-->
-      <!--<groupId>ch.qos.logback</groupId>-->
-      <!--<artifactId>logback-classic</artifactId>-->
-      <!--<version>1.2.3</version>-->
-      <!--&lt;!&ndash;<scope>test</scope>&ndash;&gt;-->
-    <!--</dependency>-->
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.2.3</version>
+      <!--<scope>test</scope>-->
+    </dependency>
 
     <dependency>
       <groupId>org.hamcrest</groupId>
