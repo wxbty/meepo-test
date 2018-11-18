@@ -12,6 +12,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+
+/*
+* 不要整个test一起执行，会重复加载xml
+* */
 public class TransactionTest {
 
     private AtomicInteger total = new AtomicInteger(200);
@@ -94,7 +98,7 @@ public class TransactionTest {
                             calcService.bussiness(orderService, stockService, userId);
                         } catch (Exception e) {
                             System.out.println("Transaction is rollbacked.");
-                            //                            e.printStackTrace();
+                            e.printStackTrace();
                         }
                     }
                     countDownLatch.countDown();
@@ -121,8 +125,8 @@ public class TransactionTest {
     }
 
     /*
-    * 执行delete之前，确保orders表有足够的记录
-    * */
+     * 执行delete之前，确保orders表有足够的记录
+     * */
     @Test
     public void testDeleteAndUpdate() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
@@ -166,13 +170,13 @@ public class TransactionTest {
         if (previousAmount == (productNumber + currentAmount)) {
             System.out.println("The result is right.");
         } else {
-            System.out.println("原先Stock库存数量="+previousStockAmount);
-            System.out.println("原先订单包含的产品量="+previousproductNumber);
+            System.out.println("原先Stock库存数量=" + previousStockAmount);
+            System.out.println("原先订单包含的产品量=" + previousproductNumber);
             System.out.println("previousAmount=" + previousAmount);
             System.out.println("productNumber + currentAmount=" + (productNumber + currentAmount));
             System.out.println("The result is wrong.");
-            System.out.println("最后Stock库存数量="+currentAmount);
-            System.out.println("最后订单包含的产品量="+productNumber);
+            System.out.println("最后Stock库存数量=" + currentAmount);
+            System.out.println("最后订单包含的产品量=" + productNumber);
         }
         assertTrue(previousAmount == (productNumber + currentAmount));
     }

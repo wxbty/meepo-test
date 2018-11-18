@@ -44,9 +44,9 @@
         <property name="dataSource" ref="dataSource2"/>
     </bean>
 
-    <bean id="monitor" class="com.tuya.txc.dubbo.MonitorDbPool">
-        <property name="dataSource" ref="dataSource2" />
-    </bean>
+    <!--<bean id="monitor" class="com.tuya.txc.dubbo.MonitorDbPool">-->
+        <!--<property name="dataSource" ref="dataSource2" />-->
+    <!--</bean>-->
 
 
     <!--dubbo配置-->

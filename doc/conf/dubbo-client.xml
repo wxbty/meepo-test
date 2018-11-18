@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <import resource="classpath:jta-supports-dubbo.xml" />
+    <context:component-scan base-package="com.tuya.txc.dubbo" />
+    <!--dubbo配置-->
+    <!-- 消费方应用名 -->
+    <dubbo:application name="order-client"  />
+    <!-- 采用multicast注册中心-->
+    <!--<dubbo:registry address="multicast://224.5.6.7:1234?unicast=false" />-->
+    <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" timeout="300000"/>
+    <dubbo:provider timeout="1500000" />
+    <dubbo:consumer check="false" timeout="1500000" />
+    <dubbo:protocol name="dubbo" port="30881" />
+    <!-- 生成远程服务代理，可以和本地bean一样使用OrderService -->
+    <dubbo:reference id="OrderService" interface="com.tuya.txc.dubbo.OrderService" group="org.feisoft.jta"
+                     filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" />
+    <!-- 生成远程服务代理，可以和本地bean一样使用StockService -->
+    <dubbo:reference id="StockService" interface="com.tuya.txc.dubbo.StockService" group="org.feisoft.jta"
+                     filter="transaction" loadbalance="transaction" cluster="failfast" retries="0" />
+
+
+    <!--将客户端类配置为bean对象，分布式事务才会启动哦-->
+    <bean id="client" class="com.tuya.txc.dubbo.Client" />
+    <bean id="calcService" class="com.tuya.txc.dubbo.CalcService" />
+</beans>

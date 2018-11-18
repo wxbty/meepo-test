@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.test</groupId>
+  <artifactId>sample-txc-dubbo</artifactId>
+  <versioning>
+    <versions>
+      <version>0.2.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20181118115147</lastUpdated>
+  </versioning>
+</metadata>

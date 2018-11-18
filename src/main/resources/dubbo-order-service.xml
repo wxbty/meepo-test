@@ -47,9 +47,9 @@
         <property name="dataSource" ref="txcDataSource"/>
     </bean>
 
-    <bean id="monitor" class="com.tuya.txc.dubbo.MonitorDbPool">
-        <property name="dataSource" ref="txcDataSource" />
-    </bean>
+    <!--<bean id="monitor" class="com.tuya.txc.dubbo.MonitorDbPool">-->
+        <!--<property name="dataSource" ref="txcDataSource" />-->
+    <!--</bean>-->
 
     <!--dubbo配置-->
     <!-- 用dubbo协议在20880端口暴露服务 -->
