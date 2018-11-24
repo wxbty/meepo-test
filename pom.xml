@@ -13,13 +13,13 @@
 
     <profiles>
         <profile>
-            <id>provider</id>
+            <id>order</id>
             <properties>
                 <com.main>com.tuya.txc.dubbo.OrderServiceImpl</com.main>
             </properties>
         </profile>
         <profile>
-            <id>consumer</id>
+            <id>stock</id>
             <properties>
                 <com.main>com.tuya.txc.dubbo.StockServiceImpl</com.main>
             </properties>
