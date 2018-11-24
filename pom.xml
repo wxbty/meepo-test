@@ -11,6 +11,21 @@
         <spring.version>4.2.4.RELEASE</spring.version>
     </properties>
 
+    <profiles>
+        <profile>
+            <id>provider</id>
+            <properties>
+                <com.main>com.tuya.txc.dubbo.OrderServiceImpl</com.main>
+            </properties>
+        </profile>
+        <profile>
+            <id>consumer</id>
+            <properties>
+                <com.main>com.tuya.txc.dubbo.StockServiceImpl</com.main>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
 
         <dependency>
@@ -157,44 +172,46 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appassembler-maven-plugin</artifactId>
-                <version>1.1.1</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.4</version>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>assemble</goal>
+                            <goal>shade</goal>
                         </goals>
+                        <configuration>
+
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+
+                            <transformers>
+
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${com.main}</mainClass>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <configurationDirectory>conf</configurationDirectory>
-                    <configurationSourceDirectory>src/main/resources</configurationSourceDirectory>
-                    <copyConfigurationDirectory>true</copyConfigurationDirectory>
-                    <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
-                    <repositoryLayout>flat</repositoryLayout>
-                    <repositoryName>lib</repositoryName>
-                    <binFileExtensions>
-                        <unix>.sh</unix>
-                    </binFileExtensions>
-                    <assembleDirectory>doc</assembleDirectory>
-                    <programs>
-                        <program>
-                            <mainClass>com.tuya.txc.dubbo.OrderServiceImpl</mainClass>
-                            <name>order</name>
-                        </program>
-                        <program>
-                            <mainClass>com.tuya.txc.dubbo.StockServiceImpl</mainClass>
-                            <name>stock</name>
-                        </program>
-                        <program>
-                            <mainClass>com.tuya.txc.dubbo.Client</mainClass>
-                            <name>client</name>
-                        </program>
-                    </programs>
-                </configuration>
             </plugin>
         </plugins>
     </build>
