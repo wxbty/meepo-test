@@ -86,14 +86,15 @@ public class TransactionTest {
         final String userId = "406";
         int previousproductNumber = orderService.getSum(userId).intValue();
         previousAmount = previousAmount + previousproductNumber;
-        int threadNum = 20;
+        int threadNum = 1;
+        final int times =2;
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0; tnum < threadNum; tnum++) {
             Thread thread = new Thread() {
 
                 @Override
                 public void run() {
-                    for (int i = 0; i < 3; i++) {
+                    for (int i = 0; i < times; i++) {
                         try {
                             calcService.bussiness(orderService, stockService, userId);
                         } catch (Exception e) {

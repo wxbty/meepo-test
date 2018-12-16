@@ -27,7 +27,7 @@ public class CalcService implements Calc {
         orderService.createOrder(orderDO);
         long time2 = System.currentTimeMillis();
         System.out.println("exe createOrder time = " + (time2 - time1));
-        if (new Random().nextInt(100) < 1) {
+        if (new Random().nextInt(100) < 50) {
             throw new ServiceException("error");
         }
 
@@ -35,7 +35,7 @@ public class CalcService implements Calc {
         stockService.updateStock(orderDO);
         time2 = System.currentTimeMillis();
         System.out.println("exe updateStock time = " + (time2 - time1));
-        if (new Random().nextInt(100) < 3) {
+        if (new Random().nextInt(100) < 30) {
             throw new ServiceException("error");
         }
     }

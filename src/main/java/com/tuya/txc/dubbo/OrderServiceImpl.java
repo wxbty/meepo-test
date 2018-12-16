@@ -19,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     public int createOrder(OrderDO orderDO) {
         try {
             //设置概率超时
-            Thread.sleep(new Random().nextInt(1700));
+            Thread.sleep(new Random().nextInt(700));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -30,7 +30,7 @@ public class OrderServiceImpl implements OrderService {
                         orderDO.getGmtCreate() });
         try {
             //设置概率超时
-            Thread.sleep(new Random().nextInt(1800));
+            Thread.sleep(new Random().nextInt(1100));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

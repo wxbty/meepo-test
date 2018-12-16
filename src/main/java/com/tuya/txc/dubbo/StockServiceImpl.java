@@ -14,12 +14,18 @@ public class StockServiceImpl implements StockService {
     public int updateStock(OrderDO orderDO) {
         System.out.println("updateStock is called.");
         try {
-            Thread.sleep(new Random().nextInt(7000));
+            Thread.sleep(new Random().nextInt(1000));
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         int ret = jdbcTemplate.update("update stock set amount = amount - ? where product_id = ?",
                 new Object[]{orderDO.getNumber(), orderDO.getProductId()});
+
+        try {
+            Thread.sleep(new Random().nextInt(1000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         Integer amount = jdbcTemplate.queryForObject("select amount from stock where product_id = ?",
                 new Object[]{orderDO.getProductId()}, java.lang.Integer.class);
@@ -66,3 +72,5 @@ public class StockServiceImpl implements StockService {
         System.in.read();
     }
 }
+
+
