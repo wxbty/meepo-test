@@ -29,9 +29,9 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.bytesoft</groupId>
-            <artifactId>bytejta-supports-dubbo</artifactId>
-            <version>0.4.8</version>
+            <groupId>ink.zfei</groupId>
+            <artifactId>jta-supports-dubbo</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
