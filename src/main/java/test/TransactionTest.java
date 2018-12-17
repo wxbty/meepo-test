@@ -86,8 +86,11 @@ public class TransactionTest {
         final String userId = "406";
         int previousproductNumber = orderService.getSum(userId).intValue();
         previousAmount = previousAmount + previousproductNumber;
-        int threadNum = 1;
-        final int times =2;
+        int threadNum = 30;
+        final int times =3;
+        final AtomicInteger seqNo = new AtomicInteger(0);
+        final AtomicInteger sucessNum = new AtomicInteger(0);
+        final AtomicInteger failNum = new AtomicInteger(0);
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0; tnum < threadNum; tnum++) {
             Thread thread = new Thread() {
@@ -96,8 +99,11 @@ public class TransactionTest {
                 public void run() {
                     for (int i = 0; i < times; i++) {
                         try {
-                            calcService.bussiness(orderService, stockService, userId);
+                            seqNo.incrementAndGet();
+                            calcService.bussiness(orderService, stockService, userId,seqNo.get());
+                            sucessNum.incrementAndGet();
                         } catch (Exception e) {
+                            failNum.incrementAndGet();
                             System.out.println("Transaction is rollbacked.");
                             e.printStackTrace();
                         }
@@ -117,6 +123,8 @@ public class TransactionTest {
         int currentAmount = stockService.getSum().intValue();
         if (previousAmount == (productNumber + currentAmount)) {
             System.out.println("The result is right.");
+            System.out.println("The sucessNum ="+sucessNum.get());
+            System.out.println("The failNum ="+failNum.get());
         } else {
             System.out.println("previousAmount=" + previousAmount);
             System.out.println("productNumber + currentAmount=" + (productNumber + currentAmount));
@@ -135,22 +143,26 @@ public class TransactionTest {
         final OrderService orderService = (OrderService) context.getBean("OrderService");
         final StockService stockService = (StockService) context.getBean("StockService");
         final Calc calcService = (Calc) context.getBean("calcService");
+        final AtomicInteger sucessNum = new AtomicInteger(0);
+        final AtomicInteger failNum = new AtomicInteger(0);
 
         int previousStockAmount = stockService.getSum().intValue();
         final String userId = "406";
         int previousproductNumber = orderService.getSum(userId).intValue();
         int previousAmount = previousStockAmount + previousproductNumber;
-        int threadNum = 17;
+        int threadNum = 30;
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0; tnum < threadNum; tnum++) {
             Thread thread = new Thread() {
 
                 @Override
                 public void run() {
-                    for (int i = 0; i < 12; i++) {
+                    for (int i = 0; i < 3; i++) {
                         try {
                             calcService.bussinessDel(orderService, stockService, userId);
+                            sucessNum.incrementAndGet();
                         } catch (Exception e) {
+                            failNum.incrementAndGet();
                             System.out.println("Transaction is rollbacked.");
                             e.printStackTrace();
                         }
@@ -170,6 +182,8 @@ public class TransactionTest {
         int currentAmount = stockService.getSum().intValue();
         if (previousAmount == (productNumber + currentAmount)) {
             System.out.println("The result is right.");
+            System.out.println("The sucessNum ="+sucessNum.get());
+            System.out.println("The failNum ="+failNum.get());
         } else {
             System.out.println("原先Stock库存数量=" + previousStockAmount);
             System.out.println("原先订单包含的产品量=" + previousproductNumber);

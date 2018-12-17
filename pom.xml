@@ -8,7 +8,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <spring.version>4.2.4.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
     </properties>
 
     <profiles>
@@ -38,6 +38,7 @@
             <artifactId>druid</artifactId>
             <version>1.0.17</version>
         </dependency>
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -118,6 +119,12 @@
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>
             <version>2.6.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>io.netty</groupId>
@@ -158,6 +165,14 @@
             <version>4.12</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>de.javakaffee</groupId>
+            <artifactId>kryo-serializers</artifactId>
+            <version>0.36</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>

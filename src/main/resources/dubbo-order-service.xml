@@ -8,7 +8,7 @@
 
 
     <context:component-scan base-package="com.tuya.txc.dubbo" />
-    <import resource="classpath:bytejta-supports-dubbo.xml" />
+    <import resource="classpath:jta-supports-dubbo.xml" />
 
     <bean id="mysql" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1?useSSL=false" />
@@ -17,10 +17,10 @@
     </bean>
 
 
-
-    <bean id="dataSourceWrap" class="org.bytesoft.bytejta.supports.jdbc.XADataSourceImpl">
+    <bean id="dataSourceWrap" class="org.feisoft.jta.supports.jdbc.XADataSourceImpl">
         <property name="xaDataSource" ref="mysql" />
     </bean>
+
     <bean id="txcDataSource" class="org.apache.commons.dbcp2.managed.BasicManagedDataSource" destroy-method="close">
         <property name="transactionManager" ref="transactionManager" />
         <property name="xaDataSourceInstance" ref="dataSourceWrap" />
@@ -48,14 +48,13 @@
     </bean>
 
 
-
     <bean id="monitor" class="com.tuya.txc.dubbo.MonitorDbPool">
         <property name="dataSource" ref="txcDataSource" />
     </bean>
 
     <!--dubbo配置-->
     <!-- 用dubbo协议在20880端口暴露服务 -->
-    <dubbo:protocol name="dubbo" port="20880" />
+    <dubbo:protocol name="dubbo" port="20880" serialization="kryo"/>
     <!-- 采用multicast注册中心-->
     <!--<dubbo:registry address="multicast://224.5.6.7:1234?unicast=false" />-->
     <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" timeout="30000"/>

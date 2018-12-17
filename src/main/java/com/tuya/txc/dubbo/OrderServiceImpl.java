@@ -15,11 +15,14 @@ public class OrderServiceImpl implements OrderService {
 
     private static JdbcTemplate jdbcTemplate = null;
 
+    //概率超时，两个时间点1/4概率，正常1/2概率
     @Transactional(rollbackFor = ServiceException.class)
     public int createOrder(OrderDO orderDO) {
         try {
             //设置概率超时
-            Thread.sleep(new Random().nextInt(700));
+            if (new Random().nextInt(100) < 20) {
+                Thread.sleep(3000);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -30,7 +33,9 @@ public class OrderServiceImpl implements OrderService {
                         orderDO.getGmtCreate() });
         try {
             //设置概率超时
-            Thread.sleep(new Random().nextInt(1100));
+            if (new Random().nextInt(100) < 20) {
+                Thread.sleep(3000);
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

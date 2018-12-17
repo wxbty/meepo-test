@@ -3,6 +3,7 @@ package com.tuya.txc.dubbo;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Client {
 
@@ -15,6 +16,7 @@ public class Client {
         int previousAmount = stockService.getSum().intValue();
         final String userId = "406";
         int threadNum = 2;
+        final AtomicInteger seqNo = new AtomicInteger(1);
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0;tnum < threadNum;tnum++) {
             Thread thread = new Thread() {
@@ -22,7 +24,7 @@ public class Client {
                 public void run() {
                     for (int i = 0;i < 10;i++) {
                         try {
-                            calcService.bussiness(orderService, stockService, userId);
+                            calcService.bussiness(orderService, stockService, userId, seqNo.get());
                         } catch (Exception e) {
                             System.out.println("Transaction is rollbacked.");
                             e.printStackTrace();

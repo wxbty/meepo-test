@@ -53,7 +53,7 @@
     <dubbo:application name="stock-service"  />
     <!--<dubbo:registry address="multicast://224.5.6.7:1234?unicast=false" />-->
     <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" timeout="300000"/>
-    <dubbo:protocol name="dubbo" port="20881" />
+    <dubbo:protocol name="dubbo" port="20881" serialization="kryo"/>
 
     <!-- 声明需要暴露的服务接口 -->
     <dubbo:service interface="com.tuya.txc.dubbo.StockService" ref="StockService" group="org.feisoft.jta"
