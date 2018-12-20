@@ -6,7 +6,7 @@ CREATE TABLE orders (
   gmt_create timestamp    NOT NULL,
   PRIMARY KEY (id)
 )
-  ENGINE = MyISAM
+  ENGINE = InnoDB
   AUTO_INCREMENT = 1
   CHARSET = utf8;
 
