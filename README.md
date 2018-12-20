@@ -28,7 +28,7 @@ CREATE TABLE orders (
 	number int(11) NOT NULL,
 	gmt_create timestamp NOT NULL,
 	PRIMARY KEY (id)
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARSET = utf8;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARSET = utf8;
 
 CREATE TABLE stock (
 	product_id int(11) NOT NULL,
