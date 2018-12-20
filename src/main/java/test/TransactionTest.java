@@ -30,8 +30,8 @@ public class TransactionTest {
 
         final String userId = "406";
         final int increaseNum = 10;
-        final int times = 13;
-        int threadNum = 20;
+        final int times = 8;
+        int threadNum = 30;
 
         int preAmount = orderService.getSum(userId).intValue() + total.get();
 
