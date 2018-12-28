@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
 * */
 public class TransactionTest {
 
-    private AtomicInteger total = new AtomicInteger(200);
+    private AtomicInteger total = new AtomicInteger(10000);
 
     //测试单sql本地事务
     @Test
@@ -29,9 +29,11 @@ public class TransactionTest {
         final Calc calcService = (Calc) context.getBean("calcService");
 
         final String userId = "406";
-        final int increaseNum = 10;
-        final int times = 8;
+        final int times = 3;
         int threadNum = 30;
+        final AtomicInteger increaseNum = new AtomicInteger(0);
+        final AtomicInteger sucessNum = new AtomicInteger(0);
+        final AtomicInteger failNum = new AtomicInteger(0);
 
         int preAmount = orderService.getSum(userId).intValue() + total.get();
 
@@ -42,12 +44,16 @@ public class TransactionTest {
                 @Override
                 public void run() {
                     for (int i = 0; i < times; i++) {
+                        int myNum = 0;
                         try {
-                            total.getAndAdd(-increaseNum);
-                            calcService.insertOrder(orderService, userId, increaseNum);
+                            myNum = increaseNum.incrementAndGet();
+                            total.getAndAdd(-myNum);
+                            calcService.insertOrder(orderService, userId, myNum);
+                            sucessNum.incrementAndGet();
                         } catch (Exception e) {
-                            total.getAndAdd(increaseNum);
-                            System.out.println("Transaction is rollbacked.");
+                            failNum.incrementAndGet();
+                            total.getAndAdd(myNum);
+                            System.out.println("Transaction is rollbacked.num="+myNum);
                             e.printStackTrace();
                         }
                     }
@@ -65,10 +71,14 @@ public class TransactionTest {
         int currentAmount = orderService.getSum(userId).intValue() + total.get();
         if (currentAmount == preAmount) {
             System.out.println("The result is right.");
+            System.out.println("The sucessNum ="+sucessNum.get());
+            System.out.println("The failNum ="+failNum.get());
         } else {
             System.out.println("preAmount=" + preAmount);
             System.out.println("currentAmount=" + currentAmount);
             System.out.println("The result is wrong.");
+            System.out.println("The sucessNum ="+sucessNum.get());
+            System.out.println("The failNum ="+failNum.get());
         }
         assertTrue(currentAmount == preAmount);
     }
