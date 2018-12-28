@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 /*
 * 不要整个test一起执行，会重复加载xml
 * */
-public class TransactionTest {
+public class DMLTransactionTest {
 
     private AtomicInteger total = new AtomicInteger(10000);
 

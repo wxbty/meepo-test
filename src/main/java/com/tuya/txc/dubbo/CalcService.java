@@ -1,5 +1,6 @@
 package com.tuya.txc.dubbo;
 
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
@@ -7,6 +8,9 @@ import java.util.Date;
 import java.util.Random;
 
 public class CalcService implements Calc {
+
+    @javax.annotation.Resource(name = "jdbcTemplate3")
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     @Transactional(rollbackFor = ServiceException.class)
@@ -64,5 +68,15 @@ public class CalcService implements Calc {
         if (new Random().nextInt(100) < 20) {
             throw new ServiceException("error");
         }
+    }
+
+    @Override
+    public void updateInfo(OrderService orderService, String userId) throws Exception {
+
+//        jdbcTemplate.update("update info set name ='lisi' where id =1");
+        int productId = new Random().nextInt(1000);
+        OrderDO orderDO = new OrderDO(1, userId, productId, 10, new Timestamp(new Date().getTime()));
+        orderService.createOrder(orderDO);
+
     }
 }

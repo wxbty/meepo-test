@@ -7,24 +7,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Client {
 
+
     public static void main(String args[]) throws Exception {
           ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"dubbo-client.xml"});
         final OrderService orderService = (OrderService)context.getBean("OrderService");
         final StockService stockService = (StockService)context.getBean("StockService");
         final Calc calcService = (Calc)context.getBean("calcService");
 
-        int previousAmount = stockService.getSum().intValue();
+        int previousAmount = 0;
+//        int previousAmount = stockService.getSum().intValue();
         final String userId = "406";
-        int threadNum = 2;
+        int threadNum = 1;
         final AtomicInteger seqNo = new AtomicInteger(1);
         final CountDownLatch countDownLatch = new CountDownLatch(threadNum);
         for (int tnum = 0;tnum < threadNum;tnum++) {
             Thread thread = new Thread() {
                 @Override
                 public void run() {
-                    for (int i = 0;i < 10;i++) {
+                    for (int i = 0;i < 1;i++) {
                         try {
-                            calcService.bussiness(orderService, stockService, userId, seqNo.get());
+                            calcService.updateInfo(orderService,userId);
                         } catch (Exception e) {
                             System.out.println("Transaction is rollbacked.");
                             e.printStackTrace();
@@ -46,6 +48,8 @@ public class Client {
             System.out.println("productNumber + currentAmount="+(productNumber + currentAmount));
             System.out.println("The result is wrong.");
         }
+
+        System.exit(0);
     }
 
        public void printTrack(){

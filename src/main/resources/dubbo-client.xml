@@ -29,4 +29,43 @@
     <!--将客户端类配置为bean对象，分布式事务才会启动哦-->
     <bean id="client" class="com.tuya.txc.dubbo.Client" />
     <bean id="calcService" class="com.tuya.txc.dubbo.CalcService" />
+
+    <bean id="mysql" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db3?useSSL=false" />
+        <property name="user" value="root" />
+        <property name="password" value="123456" />
+    </bean>
+
+    <bean id="dataSourceWrap" class="org.feisoft.jta.supports.jdbc.XADataSourceImpl">
+        <property name="xaDataSource" ref="mysql" />
+    </bean>
+    <bean id="dataSource3" class="org.apache.commons.dbcp2.managed.BasicManagedDataSource" destroy-method="close">
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="xaDataSourceInstance" ref="dataSourceWrap" />
+
+        <property name="maxTotal" value="50" />
+        <property name="initialSize" value="20" />
+        <property name="maxWaitMillis" value="60000" />
+        <property name="minIdle" value="6" />
+        <property name="logAbandoned" value="true" />
+        <property name="removeAbandonedOnMaintenance" value="true" />
+        <property name="removeAbandonedOnBorrow" value="true" />
+        <property name="removeAbandonedTimeout" value="60" />
+
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <property name="validationQuery" value="select 'x' " />
+        <property name="validationQueryTimeout" value="1" />
+        <property name="timeBetweenEvictionRunsMillis" value="30000" />
+        <property name="numTestsPerEvictionRun" value="20" />
+    </bean>
+
+    <bean id="jdbcTemplate3" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource3" />
+    </bean>
+
+    <bean id="monitor" class="com.tuya.txc.dubbo.MonitorDbPool">
+        <property name="dataSource" ref="dataSource3" />
+    </bean>
 </beans>
