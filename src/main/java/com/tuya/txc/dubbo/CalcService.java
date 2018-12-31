@@ -23,10 +23,14 @@ public class CalcService implements Calc {
 
     @Override
     @Transactional(rollbackFor = ServiceException.class)
-    public void bussiness(OrderService orderService, StockService stockService, String userId, int productNumber) throws ServiceException {
+    public void bussiness(OrderService orderService, StockService stockService, String userId, int productNumber)
+            throws ServiceException {
+
         long time1 = System.currentTimeMillis();
+        String sql = "insert into payinfo(order_id,uid,gmt_create,gmt_modified,money) values(?, ?, ?, ?,?)";
+        jdbcTemplate.update(sql, new Object[] { 1L, "406", time1, time1, productNumber });
+
         int productId = new Random().nextInt(1000);
-//        int productNumber = new Random().nextInt(5) + 1;
         OrderDO orderDO = new OrderDO(1, userId, productId, productNumber, new Timestamp(new Date().getTime()));
         orderService.createOrder(orderDO);
         long time2 = System.currentTimeMillis();
@@ -39,9 +43,8 @@ public class CalcService implements Calc {
         stockService.updateStock(orderDO);
         long time4 = System.currentTimeMillis();
         System.out.println("exe updateStock time = " + (time4 - time3));
-        if (time4 - time1 > 2500)
-        {
-            System.out.println("t4="+time4+",t1="+time1);
+        if (time4 - time1 > 2500) {
+            System.out.println("t4=" + time4 + ",t1=" + time1);
             System.out.println("exe updateBussines time = " + (time4 - time1));
         }
         if (new Random().nextInt(100) < 20) {
@@ -73,7 +76,7 @@ public class CalcService implements Calc {
     @Override
     public void updateInfo(OrderService orderService, String userId) throws Exception {
 
-//        jdbcTemplate.update("update info set name ='lisi' where id =1");
+        //        jdbcTemplate.update("update info set name ='lisi' where id =1");
         int productId = new Random().nextInt(1000);
         OrderDO orderDO = new OrderDO(1, userId, productId, 10, new Timestamp(new Date().getTime()));
         orderService.createOrder(orderDO);
