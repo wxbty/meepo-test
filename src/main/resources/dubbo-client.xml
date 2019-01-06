@@ -17,7 +17,7 @@
     <dubbo:registry address="127.0.0.1:2181" protocol="zookeeper" timeout="300000"/>
     <dubbo:provider timeout="1500000" />
     <dubbo:consumer check="false" timeout="1500000" />
-    <dubbo:protocol name="dubbo" port="30881" serialization="kryo"/>
+    <dubbo:protocol name="dubbo" port="30881"/>
     <!-- 生成远程服务代理，可以和本地bean一样使用OrderService -->
     <dubbo:reference id="OrderService" interface="com.tuya.txc.dubbo.OrderService" group="org.feisoft.jta"
                      filter="transaction" loadbalance="transaction" cluster="failfast" retries="-1" />
